@@ -6,8 +6,15 @@
     <atom:link href="https://joshdeveloper-06.github.io/daily_investment_briefing/feed.xml" rel="self" type="application/rss+xml"/>
     <description>한국경제신문 기반 AI 일일 시황 분석 리포트 (코스피·코스닥 지수 차트, 수급, 밤사이 미국증시 동향)</description>
     <language>ko</language>
-    <lastBuildDate>Wed, 09 Sep 2026 07:57:19 +0900</lastBuildDate>
+    <lastBuildDate>Thu, 10 Sep 2026 06:37:59 +0900</lastBuildDate>
     <ttl>60</ttl>
+    <item>
+      <title>2026년 9월 10일 한국경제 시황 브리핑</title>
+      <link>https://joshdeveloper-06.github.io/daily_investment_briefing/20260910_%ED%95%9C%EA%B5%AD%EA%B2%BD%EC%A0%9C_%EC%8B%9C%ED%99%A9%EB%B8%8C%EB%A6%AC%ED%95%91.html</link>
+      <guid isPermaLink="true">https://joshdeveloper-06.github.io/daily_investment_briefing/20260910_%ED%95%9C%EA%B5%AD%EA%B2%BD%EC%A0%9C_%EC%8B%9C%ED%99%A9%EB%B8%8C%EB%A6%AC%ED%95%91.html</guid>
+      <pubDate>Thu, 10 Sep 2026 07:00:00 +0900</pubDate>
+      <description>2026.09.10 시황 브리핑 — 한국증시 지수 차트(코스피·코스닥), 투자주체별 수급, A1면 헤드라인, 마켓데이터, 밤사이 미국증시 동향 및 금일 전망</description>
+    </item>
     <item>
       <title>2026년 9월 9일 한국경제 시황 브리핑</title>
       <link>https://joshdeveloper-06.github.io/daily_investment_briefing/20260909_%ED%95%9C%EA%B5%AD%EA%B2%BD%EC%A0%9C_%EC%8B%9C%ED%99%A9%EB%B8%8C%EB%A6%AC%ED%95%91.html</link>
@@ -210,13 +217,6 @@
       <guid isPermaLink="true">https://joshdeveloper-06.github.io/daily_investment_briefing/20260807_%ED%95%9C%EA%B5%AD%EA%B2%BD%EC%A0%9C_%EC%8B%9C%ED%99%A9%EB%B8%8C%EB%A6%AC%ED%95%91.html</guid>
       <pubDate>Fri, 07 Aug 2026 07:00:00 +0900</pubDate>
       <description>2026.08.07 시황 브리핑 — 한국증시 지수 차트(코스피·코스닥), 투자주체별 수급, A1면 헤드라인, 마켓데이터, 밤사이 미국증시 동향 및 금일 전망</description>
-    </item>
-    <item>
-      <title>2026년 8월 6일 한국경제 시황 브리핑</title>
-      <link>https://joshdeveloper-06.github.io/daily_investment_briefing/20260806_%ED%95%9C%EA%B5%AD%EA%B2%BD%EC%A0%9C_%EC%8B%9C%ED%99%A9%EB%B8%8C%EB%A6%AC%ED%95%91.html</link>
-      <guid isPermaLink="true">https://joshdeveloper-06.github.io/daily_investment_briefing/20260806_%ED%95%9C%EA%B5%AD%EA%B2%BD%EC%A0%9C_%EC%8B%9C%ED%99%A9%EB%B8%8C%EB%A6%AC%ED%95%91.html</guid>
-      <pubDate>Thu, 06 Aug 2026 07:00:00 +0900</pubDate>
-      <description>2026.08.06 시황 브리핑 — 한국증시 지수 차트(코스피·코스닥), 투자주체별 수급, A1면 헤드라인, 마켓데이터, 밤사이 미국증시 동향 및 금일 전망</description>
     </item>
   </channel>
 </rss>
