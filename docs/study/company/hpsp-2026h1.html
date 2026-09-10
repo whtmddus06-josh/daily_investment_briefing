@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HPSP(403870) — 2026년 반기 기준 기업분석 · 주식공부</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0d1117;--card:#161b22;--card-alt:#1c2128;--border:#30363d;--text:#e6edf3;--text-muted:#8b949e;--accent:#388bfd;--light-blue:#58a6ff;--green:#3fb950;--red:#ff6b6b;--orange:#ff9800;--em:#f0c674;--code:#ffa657;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-serif;font-size:14px;line-height:1.6;min-height:100vh;}
+.header{background:linear-gradient(135deg,#0d1117 0%,#1f3a5f 100%);padding:40px 24px 32px;text-align:center;border-bottom:1px solid var(--border);position:relative;}
+.header-logo{font-size:12px;font-weight:500;color:var(--text-muted);letter-spacing:3px;text-transform:uppercase;margin-bottom:12px;}
+.header h1{font-size:28px;font-weight:900;color:var(--text);margin-bottom:8px;}
+.header h1 span{color:var(--light-blue);}
+.header-desc{color:var(--text-muted);font-size:14px;}
+.header-nav{position:absolute;top:16px;left:16px;}
+.back-btn{display:inline-flex;align-items:center;gap:6px;background:var(--card-alt);border:1px solid var(--border);color:var(--text);text-decoration:none;font-size:12px;font-weight:600;padding:7px 12px;border-radius:8px;transition:border-color 0.15s,background 0.15s;}
+.back-btn:hover{border-color:var(--light-blue);background:rgba(88,166,255,0.12);}
+.container{max-width:720px;margin:0 auto;padding:32px 20px;}
+.crumb{font-size:12px;color:var(--text-muted);margin-bottom:16px;}
+.crumb a{color:var(--text-muted);text-decoration:none;}
+.crumb a:hover{color:var(--light-blue);}
+.section-title{font-size:13px;font-weight:700;color:var(--text-muted);letter-spacing:2px;text-transform:uppercase;margin-bottom:16px;padding-bottom:8px;border-bottom:1px solid var(--border);}
+.card-list{display:flex;flex-direction:column;gap:10px;}
+.card-item{display:flex;align-items:center;gap:16px;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px 20px;text-decoration:none;color:var(--text);transition:border-color 0.15s,background 0.15s;}
+.card-item:hover{border-color:var(--light-blue);background:var(--card-alt);}
+.card-icon{font-size:22px;flex-shrink:0;}
+.card-info{flex:1;min-width:0;}
+.card-title{font-size:15px;font-weight:700;color:var(--text);margin-bottom:3px;}
+.card-desc{font-size:12.5px;color:var(--text-muted);}
+.card-meta{font-size:11px;color:var(--text-muted);margin-top:5px;}
+.card-arrow{color:var(--text-muted);font-size:18px;transition:transform 0.15s,color 0.15s;}
+.card-item:hover .card-arrow{transform:translateX(4px);color:var(--light-blue);}
+.tag{display:inline-block;font-size:10.5px;font-weight:600;color:var(--text-muted);background:var(--card-alt);border:1px solid var(--border);border-radius:20px;padding:2px 9px;margin:3px 4px 0 0;}
+.empty{background:var(--card);border:1px dashed var(--border);border-radius:10px;padding:28px 20px;text-align:center;color:var(--text-muted);font-size:13px;}
+.footer{margin-top:48px;text-align:center;font-size:12px;color:var(--text-muted);padding-bottom:32px;}
+@media(max-width:520px){.header-nav{position:static;justify-content:center;margin-bottom:14px;display:flex;}}
+
+.note-head{margin-bottom:8px;}
+.note-title{font-size:26px;font-weight:900;line-height:1.35;margin-bottom:10px;}
+.note-summary{font-size:14px;color:var(--text-muted);border-left:3px solid var(--accent);padding:6px 0 6px 14px;margin-bottom:14px;}
+.note-meta{font-size:11.5px;color:var(--text-muted);display:flex;flex-wrap:wrap;gap:12px;padding-bottom:14px;border-bottom:1px solid var(--border);}
+.toc{background:var(--card);border:1px solid var(--border);border-left:4px solid var(--accent);
+  border-radius:0 10px 10px 0;padding:14px 18px;margin:20px 0 28px;}
+.toc-title{font-size:11px;font-weight:700;letter-spacing:1.5px;color:var(--light-blue);text-transform:uppercase;margin-bottom:8px;}
+.toc ol{margin:0;padding-left:18px;}
+.toc li{font-size:13px;margin:4px 0;}
+.toc li::marker{color:var(--text-muted);}
+.toc a{color:var(--text);text-decoration:none;}
+.toc a:hover{color:var(--light-blue);}
+/* 제목은 왼쪽 색 막대로 구간을 끊어 준다. 밑줄만 있으면 스크롤할 때
+   본문과 구분이 잘 안 된다(글이 길수록 심하다). */
+.body h2{font-size:19.5px;font-weight:800;margin:36px 0 13px;padding:1px 0 8px 13px;
+  border-bottom:1px solid var(--border);border-left:4px solid var(--accent);scroll-margin-top:16px;}
+.body h3{font-size:15.5px;font-weight:700;margin:24px 0 8px;color:var(--light-blue);}
+.body h4{font-size:14px;font-weight:700;margin:16px 0 6px;color:var(--text);}
+.body p{margin:11px 0;}
+/* 첫 h2(보통 '한 줄 요약') 바로 뒤 문단은 리드문이라 조금 키운다 */
+.body>h2:first-of-type+p{font-size:15.5px;line-height:1.8;}
+.body ul,.body ol{margin:11px 0 11px 22px;}
+.body li{margin:6px 0;}
+.body li::marker{color:var(--light-blue);}
+.body ol li::marker{font-weight:700;}
+.body a{color:var(--light-blue);text-underline-offset:2px;}
+/* ── 강조 ── 굵게가 본문과 같은 흰색이면 56군데를 굵게 써도 아무것도 눈에 안 띈다 */
+.body strong{color:var(--em);font-weight:700;}
+.body h2 strong,.body h3 strong,.body h4 strong,.body a strong{color:inherit;}
+.body mark{background:rgba(240,198,116,0.16);color:var(--em);
+  padding:1px 5px;border-radius:3px;font-weight:600;}
+.body em{color:var(--text-muted);font-style:normal;border-bottom:1px dotted var(--border);}
+.body code{background:rgba(255,166,87,0.10);border:1px solid rgba(255,166,87,0.24);color:var(--code);
+  border-radius:4px;padding:1px 5px;font-size:12.5px;font-family:ui-monospace,Menlo,Consolas,monospace;}
+.body pre{background:var(--card);border:1px solid var(--border);border-left:3px solid var(--accent);
+  border-radius:8px;padding:13px 16px;overflow-x:auto;margin:16px 0;}
+.body pre code{background:none;border:none;padding:0;color:var(--text);font-size:12.5px;line-height:1.7;}
+.body blockquote{border-left:3px solid var(--accent);background:rgba(56,139,253,0.06);
+  color:var(--text-muted);padding:10px 15px;margin:16px 0;border-radius:0 8px 8px 0;}
+.body blockquote strong{color:var(--light-blue);}
+.body hr{border:none;border-top:1px solid var(--border);margin:26px 0;}
+/* 표 스타일은 반드시 .table-wrap 안으로 한정한다.
+   lightweight-charts가 차트 컨테이너 안에 자체 <table>을 만들기 때문에,
+   '.body table' 로 잡으면 차트 내부 표까지 min-width/border가 먹어 차트가 눌린다
+   (2026-08-13 실측: 680px 컨테이너 안에서 차트가 460px로 줄어들었다). */
+.table-wrap{overflow-x:auto;margin:16px 0;border-radius:8px;border:1px solid var(--border);}
+.table-wrap table{border-collapse:collapse;width:100%;font-size:12.5px;min-width:460px;}
+.table-wrap th,.table-wrap td{border:1px solid var(--border);padding:9px 11px;text-align:left;vertical-align:top;}
+/* 머리행은 파랑으로 띄워 표의 시작을 분명히 한다 */
+.table-wrap th{background:var(--card-alt);color:var(--light-blue);font-weight:700;white-space:nowrap;
+  border-bottom:2px solid rgba(56,139,253,0.4);}
+/* 첫 열은 대개 항목 이름이라 살짝 강조하면 가로로 읽기 쉬워진다 */
+.table-wrap tbody td:first-child{font-weight:600;}
+.table-wrap tbody tr:nth-child(even){background:rgba(255,255,255,0.02);}
+.table-wrap tbody tr:hover{background:rgba(88,166,255,0.07);}
+.table-wrap strong{color:var(--em);}
+.cbox{border:1px solid var(--border);border-left-width:4px;border-radius:0 10px 10px 0;
+  padding:14px 18px;margin:20px 0;background:var(--card);}
+.cbox-head{font-size:13px;font-weight:700;margin-bottom:6px;letter-spacing:0.2px;}
+.cbox p{margin:7px 0;font-size:13px;}
+/* 박스 안에서는 머리말 색이 이미 강하다. 굵게까지 앰버로 두면 색이 겹쳐 탁해진다 */
+.cbox strong{color:var(--text);}
+.cbox.warn{border-color:rgba(255,152,0,0.45);background:rgba(255,152,0,0.07);}
+.cbox.warn .cbox-head{color:var(--orange);}
+.cbox.fail{border-color:rgba(255,107,107,0.45);background:rgba(255,107,107,0.07);}
+.cbox.fail .cbox-head{color:var(--red);}
+.cbox.ok{border-color:rgba(63,185,80,0.45);background:rgba(63,185,80,0.07);}
+.cbox.ok .cbox-head{color:var(--green);}
+.cbox.info{border-color:rgba(88,166,255,0.45);background:rgba(88,166,255,0.07);}
+.cbox.info .cbox-head{color:var(--light-blue);}
+.chart-fig{margin:20px 0;}
+.chart-wrap{background:#1a1a1f;border-radius:12px;padding:12px;position:relative;width:100%;height:420px;}
+.chart-cap{font-size:12px;color:var(--text-muted);margin-top:8px;text-align:center;}
+.disclaimer{border:1px solid var(--border);border-left:3px solid var(--text-muted);border-radius:8px;background:var(--card);padding:13px 17px;margin:28px 0 0;font-size:12.5px;color:var(--text-muted);}
+.disclaimer strong{color:var(--text);display:block;margin-bottom:5px;font-size:13px;}
+.sources{margin-top:30px;}
+.sources ol{margin:10px 0 0 20px;}
+.sources li{font-size:12.5px;color:var(--text-muted);margin:6px 0;}
+.sources a{color:var(--light-blue);}
+.note-nav{display:flex;gap:10px;margin-top:32px;}
+.note-nav a{flex:1;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:12px 16px;text-decoration:none;color:var(--text);font-size:13px;transition:border-color 0.15s;}
+.note-nav a:hover{border-color:var(--light-blue);}
+.note-nav .lbl{display:block;font-size:10.5px;color:var(--text-muted);margin-bottom:3px;}
+@media(max-width:520px){.note-title{font-size:21px;}.note-nav{flex-direction:column;}.chart-wrap{height:320px;}}
+</style>
+</head>
+<body>
+<div class="header">
+  <div class="header-nav"><a class="back-btn" href="index.html">← 기업분석</a></div>
+  <div class="header-logo">Study Note</div>
+  <h1>주식공부 <span>기업분석</span></h1>
+  <div class="header-desc">반도체 고압 수소 어닐링(HPA) 장비에서 사실상 독점적 지위를 표방해온 코스닥 상장사이지만, 그 독점 서사는 지금 특허소송으</div>
+</div>
+<div class="container">
+  <div class="crumb"><a href="../../index.html">시황 브리핑</a> ›
+    <a href="../index.html">주식공부</a> ›
+    <a href="index.html">기업분석</a></div>
+  <div class="note-head">
+    <div class="note-title">HPSP(403870) — 2026년 반기 기준 기업분석</div>
+    <div class="note-summary">반도체 고압 수소 어닐링(HPA) 장비에서 사실상 독점적 지위를 표방해온 코스닥 상장사이지만, 그 독점 서사는 지금 특허소송으로 법정에서 시험대에 올라 있고, 최대주주 사모펀드는 최근 1년 새 지분을 절반 가까이 팔았으며, 대표이사도 세 차례 바뀌었다.</div>
+    <div class="note-meta"><span>갱신 2026-09-10</span><span>난이도 중급</span><span>읽는 데 약 38분</span></div>
+    <div><span class="tag">#반도체장비</span><span class="tag">#HPA</span><span class="tag">#코스닥</span><span class="tag">#사모펀드</span><span class="tag">#특허소송</span><span class="tag">#밸류에이션</span></div>
+  </div>
+  <div class="toc"><div class="toc-title">목차</div><ol><li><a href="#h1">한 줄 요약</a></li><li><a href="#h2">요약표</a></li><li><a href="#h3">1. 회사의 개요</a></li><li><a href="#h4">2. 사업의 내용 — 해자 분석</a></li><li><a href="#h5">3. 위험요인</a></li><li><a href="#h6">4. 재무 분석</a></li><li><a href="#h7">5. MD&amp;A</a></li><li><a href="#h8">6. 주주 및 주주환원</a></li><li><a href="#h9">7. 임원 및 직원</a></li><li><a href="#h10">8. 계열회사</a></li><li><a href="#h11">9. 연구개발 (및 주요계약)</a></li><li><a href="#h12">10. CEO 분석</a></li><li><a href="#h13">11. 경쟁사 비교</a></li><li><a href="#h14">12. 밸류에이션</a></li><li><a href="#h15">종합 의견</a></li><li><a href="#h16">이어서 확인할 항목</a></li><li><a href="#h17">출처 메모</a></li></ol></div>
+  <div class="body">
+<h2 id="h1">한 줄 요약</h2>
+<p>HPSP는 반도체 열처리(고압 수소 어닐링, HPA) 장비 시장에서 스스로 "100% 점유율 유지"를 표방해 온 코스닥 상장 장비사다. <mark>그런데 이 독점 서사는 지금 경쟁사 예스티와의 특허소송으로 법정에서 시험대에 올라 있고, 최대주주인 사모펀드는 2025년 2조원 매각이 무산된 뒤 2026년 상반기에만 지분을 39.2%에서 20.5%로 절반 가까이 팔았으며, 대표이사도 최근 1년 새 세 차례 바뀌었다.</mark></p>
+<p>이 노트는 <code>business-report-checklist</code> 12단계 프레임워크로, OpenDART API 재무 데이터(별도재무제표 기준)와 공식 홈페이지·언론 보도를 함께 분석한 것이다.</p>
+<div class="cbox warn"><div class="cbox-head">⚠️ 주의</div>
+<p>이 문서는 공시·언론 자료 해석이며 매수·매도 권유가 아니다. 작성 시점(2026-09-10) 이후 주가·실적·소송 결과는 변동됐을 수 있다.</p>
+</div>
+<h2 id="h2">요약표</h2>
+<div class="table-wrap"><table><thead><tr><th>항목</th><th>판정</th></tr></thead><tbody><tr><td>해자</td><td>판단 유보</td></tr><tr><td>재무 건전성</td><td>우수</td></tr><tr><td>성장성</td><td><strong>역성장</strong></td></tr><tr><td>주주환원</td><td>보통</td></tr><tr><td>CEO 신뢰도</td><td>판단 유보</td></tr><tr><td>경쟁 우위</td><td>우세</td></tr><tr><td>밸류에이션</td><td><strong>고평가</strong></td></tr></tbody></table></div>
+<h2 id="h3">1. 회사의 개요</h2>
+<div class="table-wrap"><table><thead><tr><th>항목</th><th>내용</th></tr></thead><tbody><tr><td>회사명</td><td>주식회사 에이치피에스피 (HPSP Co., Ltd.)</td></tr><tr><td>종목코드</td><td>403870 (코스닥)</td></tr><tr><td>설립(법인등기)</td><td>2017년 3월 14일 (DART 공시 기준)</td></tr><tr><td>본사</td><td>경기도 화성시 삼성1로1길 26</td></tr><tr><td>업종코드</td><td>29271</td></tr><tr><td>결산월</td><td>12월</td></tr></tbody></table></div>
+<div class="cbox info"><div class="cbox-head">💡 참고</div>
+<p>DART 구조화 재무제표 API에서 <strong>연결재무제표(CFS) 데이터가 전 기간 조회되지 않았다</strong>(get_full_financial_statement가 매번 "데이터 없음"을 반환). 그래서 이 노트의 모든 재무 수치는 <strong>별도(OFS) 기준</strong>이다. 연결 대상 종속회사가 없는 것인지, API 한계인지는 확정하지 못했다 — §8에서 다시 다룬다.</p>
+</div>
+<p>HPSP는 2005년 10월 (주)풍산 마이크로텍의 장비사업팀으로 출발해, 2017년 4월 풍산 동탄사업장 장비사업부문에서 분사하며 지금의 사명이 됐다. 사명은 "High Pressure Solution Provider"의 약자다. 반도체 제조 공정의 게이트 산화막·계면 결함을 개선하는 고압 수소 어닐링(HPA)·고압 산화(HPO) 장비를 만들며, 2022년 7월 코스닥에 상장했다. 창업 이후 줄곧 사모펀드(크레센도에쿼티파트너스)가 경영권을 보유해 온 회사로, "창업자가 계속 경영하는" 구조는 아니다(§10에서 이어짐).</p>
+<h2 id="h4">2. 사업의 내용 — 해자 분석</h2>
+<p>공식 홈페이지는 "오늘날 거의 모든 고급 AP가 HPSP 기술로 제작된다"고 자체 소개하며, 비전에 "고압 공정 장비 100% 시장 점유율 유지"를 명시한다. <strong>이 문구는 회사 자체 서술이라 제3자 검증 없는 마케팅 언어로 읽어야 한다.</strong></p>
+<p>삼성전자·SK하이닉스·TSMC·인텔이 주요 고객군이라는 보도가 여러 매체에서 반복 확인됐다(한국경제TV 2026-07-01 등). 다만 <strong>고객별 정확한 매출 비중은 확인하지 못했다</strong> — DART 매출처 공시로 별도 재조회가 필요하다("이어서 확인할 항목").</p>
+<p><strong>해자 판별 체크:</strong></p>
+<div class="table-wrap"><table><thead><tr><th>항목</th><th>근거</th></tr></thead><tbody><tr><td>원가 우위</td><td>확인 안 됨 — 규모의 경제 근거 없음</td></tr><tr><td>전환 비용</td><td>있을 가능성 — 반도체 공정 장비는 교체·재인증에 시간이 걸린다(업계 통상적 특성)</td></tr><tr><td>네트워크 효과</td><td>해당 없음</td></tr><tr><td>무형자산</td><td>특허 다수 보유. 다만 핵심 특허 하나(이중벽 구조, 등록번호 0766303)는 특허심판원에서 <strong>최종 무효 판정</strong>을 받았고, 다른 핵심 특허(챔버 개폐장치, 등록번호 1553027)는 유효하나 경쟁사의 비침해 판단이 특허법원 2심까지 유지됐다(§9·§11)</td></tr></tbody></table></div>
+<div class="cbox warn"><div class="cbox-head">⚠️ 주의</div>
+<p>회사가 스스로 표방하는 "100% 점유율"은 코스닥 상장 경쟁사 예스티의 시장 진입과 진행 중인 특허소송으로 지금 실제로 다투어지고 있다. 서울중앙지법 특허침해금지소송의 마지막 변론이 2026년 10월 중순으로 예정돼 있고 연내 1심 판결이 예상된다 — <strong>미확정 사안</strong>이다. §9·§11에서 이어진다.</p>
+</div>
+<h2 id="h5">3. 위험요인</h2>
+<ul>
+<li><strong>경쟁사 특허소송(미해결)</strong>: 예스티와의 특허 분쟁이 무효심판·비침해확인심판·본안소송 여러 갈래로 진행 중이며 아직 최종 결론이 나지 않았다(§9·§11).</li>
+<li><strong>최대주주(사모펀드) 오버행</strong>: 크레센도에쿼티파트너스 계열 특수목적법인(히트2025홀딩스)이 2025년 지분 40.9%를 2조원에 매각하려 했으나 가격 이견으로 무산됐고, 리캡(명의 변경)을 거쳐 2026년 1월 지분 10%를 블록딜로 매각했다. 반기 중 지분이 39.23%→20.46%로 급감했다(§6). 크레센도는 잔여 지분 보유 방침을 밝혔으나 일각에서는 "기만적 엑시트" 준비라는 비판도 있다.</li>
+<li><strong>국가핵심기술 지정 가능성</strong>: 정부가 HPSP 기술을 국가핵심기술로 지정할 경우 해외 자본으로의 경영권 매각이 사실상 제한될 수 있다는 분석이 있었다(한국경제 2025-02-04) — 아직 지정 여부는 확인하지 못했다.</li>
+<li><strong>전략적 투자자 이탈</strong>: 2대주주였던 한미반도체(법인 및 곽동신 회장)가 2021년 HPSP에 투자한 뒤, 2024년부터 순차적으로 매도해 2026년 1월 7일 전량 처분했다. 투자·회수 규모는 보도 시점에 따라 다르게 나온다 — 2025년 3월 보도(한스경제)는 "375억원 투자, 누적 약 2,580억원 회수"로, 2026년 6월 보도(이코노믹리뷰)는 "한미반도체 법인·곽동신 회장 각 375억원씩 총 750억원 투자, 누적 4,795억원(투자원금 대비 639.3%) 회수"로 전한다. 두 기사의 집계 범위(개인분 단독 vs 법인+개인 합산)와 시점 차이가 원인으로 보이나 확정하지 못했다 — 초기 투자자들의 차익실현이 상장 이후 꾸준히 이어져 온 구조라는 맥락만 확인했다.</li>
+<li><strong>실적 계절성</strong>: 장비 셋업 일정상 매출이 4분기에 집중되는 경향이 있어(매일경제 2026-08-20) 분기별 실적 변동성이 크다.</li>
+</ul>
+<div class="cbox fail"><div class="cbox-head">❌ 실패 사례</div>
+<p>고객 매출 집중도의 정확한 수치는 확인하지 못했다. 삼성전자·SK하이닉스·TSMC·인텔이 주요 고객군이라는 정성적 보도만 확인됐고, 국가핵심기술 지정 여부도 확정하지 못했다 — DART 매출처 공시·정부 발표 재확인이 필요하다.</p>
+</div>
+<h2 id="h6">4. 재무 분석</h2>
+<h3>4-1. 6개년 손익·재무상태 (별도, 원 단위 → 억원 환산)</h3>
+<div class="table-wrap"><table><thead><tr><th>연도</th><th>매출</th><th>영업이익</th><th>순이익</th><th>자산</th><th>부채</th><th>자본</th><th>부채비율</th></tr></thead><tbody><tr><td>2020</td><td>612억</td><td>248억</td><td>177억</td><td>527억</td><td>183억</td><td>344억</td><td>53.3%</td></tr><tr><td>2021</td><td>918억</td><td>452억</td><td>353억</td><td>916억</td><td>389억</td><td>527억</td><td>73.7%</td></tr><tr><td>2022</td><td>1,593억</td><td>852억</td><td>660억</td><td>2,609억</td><td>656억</td><td>1,954억</td><td>33.6%</td></tr><tr><td>2023</td><td>1,791억</td><td>952억</td><td>804억</td><td>3,207억</td><td>436억</td><td>2,771억</td><td>15.7%</td></tr><tr><td>2024</td><td>1,814억</td><td>939억</td><td>863억</td><td>3,199억</td><td>420억</td><td>2,779억</td><td>15.1%</td></tr><tr><td>2025</td><td>1,730억</td><td>899억</td><td>727억</td><td>3,697억</td><td>615억</td><td>3,082억</td><td>19.9%</td></tr></tbody></table></div>
+<p><strong>YoY 성장률:</strong></p>
+<div class="table-wrap"><table><thead><tr><th>연도</th><th>매출</th><th>영업이익</th><th>순이익</th></tr></thead><tbody><tr><td>2021</td><td>+50.0%</td><td>+82.4%</td><td>+100.2%</td></tr><tr><td>2022</td><td>+73.7%</td><td>+88.4%</td><td>+86.9%</td></tr><tr><td>2023</td><td>+12.4%</td><td>+11.9%</td><td>+21.9%</td></tr><tr><td>2024</td><td>+1.3%</td><td>-1.3%</td><td>+7.3%</td></tr><tr><td>2025</td><td>-4.6%</td><td>-4.3%</td><td>-15.8%</td></tr></tbody></table></div>
+<div class="cbox warn"><div class="cbox-head">⚠️ 주의</div>
+<p>"고성장" 통념과 달리 <strong>2024년부터 성장이 꺾였다.</strong> 2021~2022년의 폭발적 성장(+50~74%) 이후 2023년부터 성장률이 둔화되기 시작해, 2024년은 사실상 정체(+1.3%), 2025년은 역성장(-4.6%)으로 전환했다. 2022년 유상증자(IPO)와 2023년 대규모 무상증자(60,869,250주)가 이 기간 자본 급증의 배경이다.</p>
+</div>
+<h3>4-2. 2026년 반기 — 매출은 줄고 순이익은 늘어난 엇갈린 그림</h3>
+<div class="table-wrap"><table><thead><tr><th></th><th>2025년 상반기</th><th>2026년 상반기</th><th>YoY</th></tr></thead><tbody><tr><td>매출</td><td>882억</td><td>781억</td><td>-11.5%</td></tr><tr><td>영업이익</td><td>474억</td><td>445억</td><td>-6.1%</td></tr><tr><td>순이익</td><td>359억</td><td>490억</td><td>+36.4%</td></tr></tbody></table></div>
+<p>순이익이 매출·영업이익 감소에도 오히려 36.4% 늘어난 것은 이례적이다. 2026년 반기 세전이익(500.0억원) 대비 법인세비용이 약 10.3억원에 불과해, 계산상 실효세율이 약 2.1%에 그친다.</p>
+<div class="cbox fail"><div class="cbox-head">❌ 실패 사례</div>
+<p>실효세율 약 2.1%는 정상적인 법인세율(과세표준 구간별 9~24%)보다 현저히 낮다. 세액공제·이연법인세 조정 등 여러 가능성이 있으나 DART 데이터만으로는 원인을 특정할 수 없다 — 지어내지 않고 확인 불가로 남긴다.</p>
+</div>
+<h3>4-3. 현금흐름</h3>
+<div class="table-wrap"><table><thead><tr><th>구분</th><th>영업CF</th><th>투자CF</th><th>재무CF</th><th>해석</th></tr></thead><tbody><tr><td>이상적 패턴</td><td>(+)</td><td>(−)</td><td>(−)</td><td>영업으로 벌고, 성장에 투자, 주주에 환원</td></tr><tr><td>성장 초기 패턴</td><td>(+)</td><td>(−)</td><td>(+)</td><td>외부 자금으로 공격 투자 중</td></tr><tr><td>위험 신호 패턴</td><td>(−)</td><td>(+)</td><td>(+)</td><td>자산 팔고 차입 늘려 버팀</td></tr></tbody></table></div>
+<div class="table-wrap"><table><thead><tr><th>구간</th><th>영업CF</th><th>투자CF</th><th>재무CF</th><th>패턴</th></tr></thead><tbody><tr><td>2023년</td><td>+664억</td><td>-1,479억</td><td>-42억</td><td>이상적(단, 투자유출 이례적으로 큼)</td></tr><tr><td>2024년</td><td>+838억</td><td>+198억</td><td>-939억</td><td>표준 3패턴 어디에도 부합 안 함</td></tr><tr><td>2025년</td><td>+1,002억</td><td>-192억</td><td>-483억</td><td>이상적</td></tr><tr><td>2026 반기</td><td>+265억</td><td>-152억</td><td>-402억</td><td>이상적 (전년동기는 영업+/투자+/재무-)</td></tr></tbody></table></div>
+<div class="cbox info"><div class="cbox-head">💡 참고</div>
+<p>2023년 투자활동의 이례적으로 큰 유출(-1,479억원)은 IPO 조달자금을 금융상품 등에 운용한 결과로 추정된다. 2024년 재무활동의 대규모 유출(-939억원)은 그 해 배당성향이 9.31%→55.89%로 급등한 것과 시기적으로 맞물려 있다(§6). 다만 항목별 정확한 지출 내역(배당 vs 자사주 vs 기타)은 원문 확인이 필요하다.</p>
+</div>
+<h3>4-4. 재무비율 · 배당</h3>
+<div class="table-wrap"><table><thead><tr><th>지표</th><th>2023</th><th>2024</th><th>2025</th><th>2026 반기</th></tr></thead><tbody><tr><td>ROE</td><td>34.0%</td><td>31.1%</td><td>24.8%</td><td>15.8%(반기, 비연환산)</td></tr><tr><td>부채비율</td><td>15.7%</td><td>15.1%</td><td>19.9%</td><td>29.8%</td></tr><tr><td>유동비율</td><td>663.8%</td><td>580.4%</td><td>475.8%</td><td>341.1%</td></tr><tr><td>순이익률</td><td>44.9%</td><td>-</td><td>42.0%</td><td>62.7%</td></tr><tr><td>매출총이익률</td><td>-</td><td>-</td><td>73.0%</td><td>74.8%</td></tr></tbody></table></div>
+<p>부채비율 15~30%대, 유동비율 300~660%대는 반도체 장비사 중에서도 이례적으로 건전한 수준이다. 다만 두 지표 모두 2025년부터 소폭 악화(부채비율 상승, 유동비율 하락) 추세라는 점은 함께 봐야 한다.</p>
+<div class="table-wrap"><table><thead><tr><th>배당</th><th>2023</th><th>2024</th><th>2025</th></tr></thead><tbody><tr><td>주당배당금(DPS)</td><td>150원</td><td>600원</td><td>500원</td></tr><tr><td>배당성향</td><td>9.31%</td><td>55.89%</td><td>55.66%</td></tr><tr><td>배당수익률</td><td>0.32%</td><td>2.24%</td><td>1.93%</td></tr><tr><td>현금배당총액</td><td>75억</td><td>482억</td><td>404억</td></tr></tbody></table></div>
+<div class="cbox warn"><div class="cbox-head">⚠️ 주의</div>
+<p>배당성향이 2023년 9.31%에서 2024년 55.89%로 급등한 뒤 55%대에 고착됐다. §10-2에서 이 시점이 최대주주 매각 시도·오버행 논란과 겹치는지 다시 짚는다.</p>
+</div>
+<h2 id="h7">5. MD&amp;A</h2>
+<div class="cbox info"><div class="cbox-head">💡 참고</div>
+<p>사업보고서의 서술형 경영진단(MD&amp;A) 원문은 OpenDART 구조화 API로 가져올 수 없다. 대신 언론 보도로 보완하면, 2026년 2분기 영업이익률이 61.4%까지 상승해 시장 예상치를 웃돌았으나(잡포스트 2026-09-08), 언론은 "상반기 전체로는 완전한 성장국면 전환을 단정하기 어렵다"고 평가한다. 장비 셋업 일정상 매출이 4분기에 집중되는 계절성이 있어(매일경제 2026-08-20) 분기별 변동성이 크다는 점도 함께 보도됐다.</p>
+</div>
+<h2 id="h8">6. 주주 및 주주환원</h2>
+<h3>6-1. 지분 구조 — 반년 새 절반 가까이 판 최대주주</h3>
+<div class="table-wrap"><table><thead><tr><th>시점</th><th>최대주주(히트2025홀딩스) 지분율</th></tr></thead><tbody><tr><td>2025년 말</td><td>39.23%</td></tr><tr><td>2026년 반기말</td><td>20.46%</td></tr></tbody></table></div>
+<p>같은 기간의 대량보유 변동 이력을 보면, 2대주주였던 한미반도체가 2024년 9월 6.63%에서 2026년 1월 7일 0%(전량 처분)까지 순차적으로 이탈했고, 그 자리를 삼성자산운용·미래에셋자산운용 등 기관투자자가 새로 채웠다(2026년 1~7월 각각 5%대 신규 진입 후 지분율 확대·축소를 반복).</p>
+<div class="cbox warn"><div class="cbox-head">⚠️ 주의</div>
+<p>최대주주(사모펀드) 지분이 최근 1년 새 39%대→20%대로 급감했고, 과거 2대주주였던 한미반도체도 2026년 1월 전량 이탈했다. 지분 구조가 "전략적 투자자 중심"에서 "기관 유동성 중심"으로 빠르게 재편되고 있다 — §3의 오버행 리스크와 같은 흐름이다.</p>
+</div>
+<h3>6-2. 자사주 — 소각 여부를 확정할 수 없는 사례</h3>
+<div class="table-wrap"><table><thead><tr><th>항목</th><th>2026년 반기</th></tr></thead><tbody><tr><td>기초 신탁 보유 자기주식</td><td>2,736,250주</td></tr><tr><td>처분</td><td>95,966주</td></tr><tr><td>기타 증가</td><td>1,699,120주</td></tr><tr><td>기말 신탁 보유 자기주식</td><td>941,164주</td></tr></tbody></table></div>
+<p>2026년 상반기 내내 "자기주식처분결정" 주요사항보고서가 반복 공시됐다(기재정정 포함 다수 건). 별도로 2026년 2월 12일 "주식소각결정" 공시가 있었다.</p>
+<div class="cbox fail"><div class="cbox-head">❌ 실패 사례</div>
+<p>자사주 "기타 증가 1,699,120주"의 정확한 사유, 2026-02-12 주식소각결정의 실제 소각 수량, 반복된 자사주 처분의 구체적 목적(임직원 보상 재원으로 추정되나 확정 아님)은 구조화 API로 확인되지 않는다. 코스메카코리아·주성엔지니어링 사례처럼 "매입→소각 이행 여부"를 명확히 판정할 근거가 부족해 <strong>확인 불가</strong>로 남긴다.</p>
+</div>
+<h2 id="h9">7. 임원 및 직원</h2>
+<h3>7-1. 등기임원 (2026년 반기 기준)</h3>
+<div class="table-wrap"><table><thead><tr><th>이름</th><th>직위</th><th>이력</th></tr></thead><tbody><tr><td>(§10 참고)</td><td>대표이사</td><td>재임 9년 2개월(등기이사 누적 재임기간으로 추정) — 아래 [[box:info]] 참고</td></tr><tr><td>김근영</td><td>전무이사(CSO)</td><td>서울대 금속공학, 포항공대 재료공학 석사, 전 한국다우케미칼 상무</td></tr><tr><td>김태영</td><td>기타비상무이사</td><td>Northwestern 경제학, 현 크레센도에쿼티파트너스 Principal</td></tr><tr><td>채희엽</td><td>독립이사/감사위원</td><td>MIT 화학공학 박사, 전 Applied Materials, 현 성균관대 교수</td></tr><tr><td>송종호</td><td>독립이사/감사위원</td><td>고려대 물리학/경영학, 현 팔라티노프라이빗에쿼티 대표이사, 전 SK하이닉스 경영전략실</td></tr></tbody></table></div>
+<p>미등기 임원(부사장급)으로는 Applied Materials 26년 경력의 Baek Lakho, Lam Research·Novellus 출신 Eddie Ka ho Chiu, 그리고 2026년 상반기 새로 합류한 CTO 한대희(도쿄공대 박사, LG Display·SK하이닉스 R&amp;D 출신, 재임 3개월)·CFO 함희준(Yale 석사, 전 UBS·다이와증권, 재임 1개월)이 있다.</p>
+<div class="cbox info"><div class="cbox-head">💡 참고</div>
+<p>DART 반기보고서(2026-06-30 기준)의 등기 대표이사명은 "이케빈기두"로 기재돼 있다. 그런데 같은 시기 언론은 2025년 11월 선임된 이춘흥, 2026년 8월 31일 합류한 김재현을 각자대표로 보도한다(§10). <strong>등기부 표기와 언론 보도의 이름이 다르게 나타나는데, 이 노트에서는 어느 쪽이 맞는지 단정하지 않는다</strong> — 다만 해당 등기임원의 재임기간(9년 2개월)이 회사 설립 시점(2017년)과 맞닿아 있는 것으로 볼 때, 이는 "대표이사 취임 시점"이 아니라 "등기이사로서의 누적 재임기간"일 가능성이 높다. 사업보고서 원문 확인이 필요한 항목으로 "이어서 확인할 항목"에 남긴다.</p>
+</div>
+<div class="cbox warn"><div class="cbox-head">⚠️ 주의</div>
+<p>CTO·CFO가 모두 2026년 상반기에 새로 선임됐다(재임 1~3개월). 대표이사 3회 교체(§10)와 겹쳐 핵심 경영진이 짧은 기간에 대거 바뀐 상태다.</p>
+</div>
+<h3>7-2. 직원 현황</h3>
+<div class="table-wrap"><table><thead><tr><th>시점</th><th>총원</th><th>남성 평균근속</th><th>여성 평균근속</th></tr></thead><tbody><tr><td>2025년 말</td><td>126명 (남107/여19)</td><td>3.4년</td><td>2.1년</td></tr><tr><td>2026년 반기말</td><td>134명 (남118/여16)</td><td>3.1년</td><td>2.8년</td></tr></tbody></table></div>
+<p>반년 새 총원이 126명에서 134명으로(+6.3%) 늘었다. 남성 인원은 +11명 늘고 여성 인원은 -3명 줄어 구성이 바뀌었는데, 이는 정상적인 변화로 보이며 §4의 실적 정체와 상충하지 않는다 — 신사업·인증 대응을 위한 인력 확충일 가능성이 있으나 확정 근거는 없다.</p>
+<h2 id="h10">8. 계열회사</h2>
+<div class="cbox fail"><div class="cbox-head">❌ 실패 사례</div>
+<p>DART 구조화 재무제표 API에서 연결재무제표(CFS) 데이터가 전 기간 조회되지 않았다. 이것이 "연결 대상 종속회사가 없다"는 뜻인지, 단순히 이 API 엔드포인트의 한계인지 <strong>확정할 수 없다.</strong> 홈페이지 연혁에 캘리포니아(CA) 지점 설립 사실이 언급되지만, 이것이 별도 법인인지 국내 법인의 해외 지사인지도 확인하지 못했다. 사업보고서 원문의 "계열회사 현황" 절 열람이 필요하다.</p>
+</div>
+<h2 id="h11">9. 연구개발 (및 주요계약)</h2>
+<div class="cbox fail"><div class="cbox-head">❌ 실패 사례</div>
+<p>연구개발비는 DART 재무제표 계정에 별도로 존재하지 않아 R&amp;D비/매출 비율을 산출하지 못했다.</p>
+</div>
+<p>HPSP는 2015년부터 벨기에 반도체 연구기관 imec과 HPA·HPO 관련 공동연구를 진행해왔다(imec·PR Newswire 공식 보도자료). 신임 CTO 한대희(도쿄공대 박사, LG Display·SK하이닉스 R&amp;D 출신)가 2026년 상반기 합류했다.</p>
+<p><strong>핵심 특허 소송 현황(진행 중, 미확정):</strong></p>
+<ul>
+<li>HPSP의 이중벽 구조 특허(등록번호 0766303, "303특허"): 특허심판원 <strong>최종 무효 판정</strong></li>
+<li>HPSP의 챔버 개폐장치 특허(등록번호 1553027, "027특허"): <strong>유효 판정</strong>, 그러나 경쟁사 예스티의 비침해 판단이 특허법원 2심까지 유지됨</li>
+<li>서울중앙지법 특허침해금지소송(본안): 2026년 10월 중순 마지막 변론, 연내 1심 판결 예상</li>
+</ul>
+<div class="cbox warn"><div class="cbox-head">⚠️ 주의</div>
+<p>R&amp;D·특허는 이 회사 해자의 핵심 근거인데, 정작 핵심 특허 하나는 무효 판정을 받았고 나머지도 비침해 판결이 유지되는 중이다. §2·§11과 함께 읽어야 한다.</p>
+</div>
+<h2 id="h12">10. CEO 분석</h2>
+<figure class="chart-fig"><img src="data:image/webp;base64,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" alt="이춘흥 대표이사 — 홈페이지 CEO 인사말 페이지 게재 사진(2026년 8월 김재현 각자대표 합류 이전으로 추정)" style="width:100%;border-radius:10px;display:block;"><figcaption class="chart-cap">이춘흥 대표이사 — 홈페이지 CEO 인사말 페이지 게재 사진(2026년 8월 김재현 각자대표 합류 이전으로 추정)</figcaption></figure>
+<div class="cbox info"><div class="cbox-head">💡 참고</div>
+<p>위 사진은 회사 홈페이지 CEO 인사말 페이지(2026-09-10 확인 시점)에 게재된 것이며, 2026년 8월 31일 합류한 신임 각자대표 김재현의 사진은 확인하지 못했다.</p>
+</div>
+<h3>10-1. 이력 및 선임 배경</h3>
+<p>HPSP는 2005년 (주)풍산 마이크로텍의 장비사업팀으로 출발해 2017년 4월 풍산에서 분사한 회사다 — "창업자가 계속 경영하는" 구조가 아니라, 사모펀드(크레센도에쿼티파트너스)가 2017년 약 106억원에 경영권을 인수해 지금까지 지배해 온 회사다.</p>
+<p><strong>최근 1년 경영진 교체 타임라인:</strong></p>
+<div class="table-wrap"><table><thead><tr><th>시점</th><th>사건</th></tr></thead><tbody><tr><td>2025-09-26</td><td>대표이사변경 공시(DART 등록 1회차)</td></tr><tr><td>2025-11-07</td><td>대표이사변경 공시(DART 등록 2회차) — 이춘흥(전 Intel ATTD GM 겸 SVP, 본인 명의 한국 38건·미국 21건 특허 보유) 취임. 크레센도가 "삼고초려" 끝에 영입해 "HPSP 3.0" 전략을 추진한다고 보도됨</td></tr><tr><td>2026-06-25</td><td>대표이사변경 공시(DART 등록 3회차) — 어떤 인사 변경인지 뉴스로 특정하지 못했다</td></tr><tr><td>2026-06(경)</td><td>CFO 함희준(전 UBS·다이와증권코리아 등)·CTO 한대희(도쿄공대 박사, LG Display·SK하이닉스 R&amp;D 출신) 영입 보도</td></tr><tr><td>2026-08-31</td><td>디일렉 보도 — 김재현(전 한화세미텍 대표, 원익IPS R&amp;D총괄·박막증착사업부장 출신)이 신임 각자대표로 합류, 이춘흥과 공동대표 체제</td></tr></tbody></table></div>
+<div class="cbox fail"><div class="cbox-head">❌ 실패 사례</div>
+<p>DART 공시상 대표이사변경은 12개월 새 3회(2025-09-26, 2025-11-07, 2026-06-25) 등록됐다. 그런데 김재현 각자대표 합류를 보도한 디일렉 기사는 날짜가 2026-08-31로, 세 번째 공시일(2026-06-25)과 두 달 이상 차이가 난다. <strong>이 두 사건이 같은 인사 변경을 가리키는지, 아니면 실제로 4번째 변경이 있었는지 확인하지 못했다</strong> — 사업보고서 원문 확인이 필요하다("이어서 확인할 항목").</p>
+</div>
+<p>경위가 정확히 하나로 맞아떨어지지는 않지만, DART 공시만 놓고 봐도 12개월 새 대표이사 변경이 3건 등록됐고 CFO·CTO도 이 기간에 새로 선임됐다는 사실 자체는 분명하다 — 경영진이 짧은 기간에 대거 교체된 셈이다. 크레센도는 이를 "전·후공정 강화를 위한 HPSP 3.0 전략"으로 설명하지만, 같은 기간 최대주주 지분이 절반 가까이 팔려나간 것(§6)과 맞물려 시장 일각에서는 이를 PE의 "기만적 엑시트" 준비로 보는 시각도 있다.</p>
+<h3>10-2. 주주환원 정책 — 숫자로 재확인</h3>
+<div class="table-wrap"><table><thead><tr><th>평가 기준</th><th>이 회사의 상태</th></tr></thead><tbody><tr><td>자사주 매입→소각</td><td><strong>확인 불가</strong>(§6-2) — 반복적 처분만 확인, 실제 소각 여부·수량 미확인</td></tr><tr><td>배당성향 추이</td><td>2023 9.31% → 2024 55.89% → 2025 55.66% — 급격한 상승 후 고착</td></tr><tr><td>배당 재원</td><td>이익잉여금 기반으로 추정되나 원문 미확인</td></tr></tbody></table></div>
+<div class="cbox warn"><div class="cbox-head">⚠️ 주의</div>
+<p>배당성향이 2024년에 급등한 시점이 최대주주의 2조원 매각 시도(2025년 초 보도)·리캡(2025-05)과 시기적으로 겹친다. 인과관계를 단정할 근거는 없지만, 체크리스트가 경고하는 "급격한 배당성향 상승은 PE 자금회수 신호일 수 있다"는 패턴과 부합하는 정황이다.</p>
+</div>
+<h3>10-3. 신사업·영업 포부의 실현 가능성</h3>
+<p>HPSP는 트랜지스터·인터커넥트·패터닝·고급 메모리·패키징부터 센서, 아날로그/혼합신호 소자, 광전자까지 적용 영역을 확대하고 있다고 홈페이지에서 밝힌다. 2026년 7월 삼성전자·SK하이닉스에 D램용 장비를 신규 납품한다는 보도가 있어(한국경제TV) 고객사·응용처 확대가 일부 진행 중인 것으로 보인다. 다만 "적용 영역 확대"라는 선언 대비 구체적인 매출 기여도는 확인하지 못했다.</p>
+<h3>10-4. 실질 경영 활동 체크</h3>
+<ul>
+<li>DART 공시 기준 대표이사변경 3회(2025-09~2026-06) + 언론 보도 기준 각자대표 추가 합류(2026-08), CFO·CTO 동시 신규 선임 — 정확한 사건 대응관계는 §10-1에서 확인 불가로 남겼지만, 경영진 재편이 형식적이지 않고 실제로 실행됐다는 사실 자체는 분명하다.</li>
+<li>독립이사 2인 모두 전문성이 뚜렷하다(MIT 화학공학 박사 겸 성균관대 교수, PE 대표 겸 전 SK하이닉스 경영전략실 출신). 다만 이사회 구도에서 PE(크레센도) 측 인사(기타비상무이사 김태영 등)가 상당한 영향력을 유지하고 있다.</li>
+<li>2026-02-12 배당·소각 결정을 실제 공시로 집행했다(세부 수량은 §6-2에서 확인 불가로 남김).</li>
+</ul>
+<h2 id="h13">11. 경쟁사 비교</h2>
+<p><strong>국내 경쟁사</strong>: 예스티(코스닥 상장) — 2014년 12월 코넥스 상장 후 코스닥으로 이전한 회사로, "HPSP가 독점해온 시장의 벽을 허물었다"는 평가를 받는다. HPSP와 특허 무효심판·비침해확인심판·특허침해금지소송을 다투는 중이다(§9).</p>
+<p><strong>해외 경쟁사</strong>: 이번 조사에서 HPA 장비 분야의 구체적인 해외 경쟁사를 확인하지 못했다. (검색 과정에서 나온 일부 결과는 업종이 전혀 다른 회사로 판단돼 배제했다 — 지어내지 않는다.)</p>
+<div class="cbox fail"><div class="cbox-head">❌ 실패 사례</div>
+<p>HPSP의 글로벌 시장점유율(%) 수치, 그리고 예스티 외 해외 경쟁사의 실체는 확인하지 못했다. "사실상 독점"이라는 표현은 다수 언론이 반복하지만, 이는 예스티의 국내 특허분쟁 이전 시점 서술이 섞여 있을 가능성이 있어 그대로 받아들이지 않는다.</p>
+</div>
+<h2 id="h14">12. 밸류에이션</h2>
+<div class="table-wrap"><table><thead><tr><th>지표</th><th>값</th><th>근거</th></tr></thead><tbody><tr><td>현재가</td><td>55,600원</td><td>Yahoo Finance(403870.KQ), 2026-09-09 기준</td></tr><tr><td>52주 범위</td><td>26,500원 ~ 92,000원</td><td></td></tr><tr><td>트레일링 PER</td><td>61.7배</td><td>현재가 ÷ 2025 EPS(901원)</td></tr><tr><td>트레일링 PBR</td><td>14.9배</td><td>현재가 ÷ 2026반기 BPS(약 3,732원)</td></tr><tr><td>연환산 PER</td><td>47.7배</td><td>현재가 ÷ 2026반기 EPS 연환산(약 1,166원)</td></tr></tbody></table></div>
+<div class="cbox warn"><div class="cbox-head">⚠️ 주의</div>
+<p>2026년 6월 기준 코스닥 상장사 중 증권사 간 목표주가 편차가 34.9%로 최대 수준으로 꼽혔다 — 시장의 밸류에이션 의견이 크게 갈린다는 뜻이다. 다른 IPO 기업(멜콘) 비교에서도 HPSP가 "고PER 비교군"으로 인용됐다. 트레일링 PER 61.7배·PBR 14.9배는 매출총이익률 73~75%의 고마진 구조를 감안해도, 2024년부터의 성장 정체(§4)를 고려하면 낮은 수준이라 보기 어렵다.</p>
+</div>
+<p><strong>판정</strong>: 재무건전성(부채비율 20%대, 유동비율 300%+, 고마진)은 우수하지만, 성장이 꺾인 상태에서 트레일링 PER 60배대는 고평가로 판단한다. 시장의 목표주가 의견 분산 자체가 이 불확실성을 반영한다.</p>
+<h2 id="h15">종합 의견</h2>
+<p><strong>한줄 요약</strong>: 반도체 고압 수소 어닐링 장비에서 사실상 독점적 지위를 표방해온 코스닥 상장사이지만, 그 서사는 특허소송으로 시험대에 올라 있고, 최대주주 사모펀드의 지분 매각과 경영진 대거 교체가 동시에 진행 중이다.</p>
+<p><strong>해자 판정</strong>: 판단 유보 <strong>재무 건전성</strong>: 우수 <strong>성장성</strong>: 역성장 <strong>주주환원</strong>: 보통 <strong>CEO 신뢰도</strong>: 판단 유보 <strong>경쟁 우위</strong>: 우세</p>
+<p><strong>투자 매력 포인트</strong></p>
+<ol>
+<li>부채비율 20%대·유동비율 300%대·매출총이익률 73~75%로 이례적으로 건전한 재무구조를 갖췄다.</li>
+<li>고압 수소 어닐링(HPA) 분야에서 오랜 기간 사실상 독점적 지위를 구축해왔고, imec 등과의 공동연구로 기술 영역을 계속 확장 중이다.</li>
+<li>2026년 상반기 CTO·CFO·각자대표를 외부 전문가로 새로 영입하며 경영 체제를 재정비하고 있다.</li>
+</ol>
+<p><strong>핵심 리스크</strong></p>
+<ol>
+<li>최대주주(사모펀드) 지분이 최근 1년 새 절반 가까이 시장에 풀렸고, 잔여 지분 오버행 우려가 남아있다.</li>
+<li>핵심 특허 중 하나가 무효 판정을 받았고 경쟁사와의 특허침해금지소송 1심 판결이 아직 나오지 않아, 독점 서사 자체가 법적으로 불확실하다.</li>
+<li>2024년부터 매출·영업이익 성장이 꺾였는데(2025년 -4.6%, 2026년 반기 -11.5%) 트레일링 PER은 61.7배로 여전히 높다.</li>
+</ol>
+<p><strong>CEO 한줄 평가</strong>: 창업자가 아닌 사모펀드가 선임한 전문경영인 체제로, 최근 1년간 세 차례 교체되며 재정비를 거치는 중이라 아직 장기 신뢰를 판단하기 이르다.</p>
+<p><strong>경쟁사 대비 한줄 평가</strong>: 오랜 기술 우위로 사실상 독점 지위를 누려왔지만, 예스티와의 특허소송 결과에 따라 그 지위의 법적 기반이 흔들릴 수 있다.</p>
+<p><strong>밸류에이션 코멘트</strong>: 트레일링 PER 61.7배·PBR 14.9배는 고마진 구조를 감안해도 최근 성장 정체를 고려하면 높은 수준이며, 증권사 간 목표주가 편차(34.9%)가 시장의 의견 분산을 보여준다.</p>
+<h2 id="h16">이어서 확인할 항목</h2>
+<ul>
+<li>DART 등기부상 대표이사 표기("이케빈기두")와 언론 보도(이춘흥·김재현)의 이름 불일치 — 사업보고서 원문 확인 필요</li>
+<li>2026-06-25 대표이사변경 공시(DART 3회차)와 김재현 각자대표 합류 보도(디일렉, 2026-08-31)가 같은 사건인지, 별개의 4번째 변경이 있었는지 — 사업보고서·공시 원문 확인 필요</li>
+<li>한미반도체(곽동신 회장)의 HPSP 투자·회수 규모가 보도마다 다른(375억/2,580억 vs 750억/4,795억) 이유 — 원문 대조 필요</li>
+<li>CFS(연결재무제표) 데이터 부재 이유와 계열회사·해외법인 구조 — 사업보고서 "계열회사 현황" 원문 열람 필요</li>
+<li>예스티와의 특허침해금지소송(서울중앙지법) 1심 판결 — 2026년 10월 변론, 연내 선고 예상</li>
+<li>자사주 반복 처분·소각결정의 구체적 목적과 수량 — 원문 확인 필요</li>
+<li>R&amp;D비 실제 규모 — 구조화 API 미제공</li>
+<li>고객 매출 집중도(삼성전자·SK하이닉스·TSMC 등)의 정확한 수치 — DART 매출처 공시 재조회 필요</li>
+<li>2026년 반기 실효세율(약 2.1%)이 낮게 나온 원인 — 원문 확인 필요</li>
+</ul>
+<h2 id="h17">출처 메모</h2>
+<ul>
+<li><strong>DART</strong>: 반기보고서(rcept_no 20260814004015, 2026.06 기준) — 최신 스냅샷(별도재무제표). 사업보고서(2022~2025) — 다개년 재무. CFS(연결)는 전 기간 데이터 없음.</li>
+<li><strong>공식 홈페이지</strong>: thehpsp.com — 회사개요, 연혁, Mission/Vision, Technology, CEO인사말 각 하위 페이지.</li>
+<li><strong>언론</strong>: 더벨·비즈니스포스트·디일렉·이데일리·조선비즈·한국경제·한스경제·지디넷코리아·딜사이트·뉴스에프씨·한국경제TV·블로터·잡포스트·매일경제·아시아경제·더스탁(frontmatter sources 참고).</li>
+<li><strong>시세</strong>: Yahoo Finance(403870.KQ), 조회 시점 최근 거래일 종가 55,600원 기준.</li>
+<li>재무 수치는 전부 DART 원 단위(별도재무제표)를 억원으로 환산했다(반올림). PER·PBR은 DART가 값을 제공하지 않아 Yahoo 시세로 직접 계산했다.</li>
+</ul>
+<div class="disclaimer"><strong>📌 읽기 전에</strong><p>이 글은 개인 공부 기록이며 투자 자문이 아닙니다. 특정 종목의 매수·매도를 권유하지 않습니다. 여기 실린 지표와 규칙은 확률적 신호일 뿐 결과를 보장하지 않으며, 투자 판단과 그 결과는 투자자 본인에게 귀속됩니다.</p></div>
+  </div>
+  <div class="sources"><div class="section-title">출처</div><ol><li>OpenDART API — 재무제표(별도)·재무지표·배당·최대주주·임원·직원 현황 (반기보고서 rcept_no 20260814004015, 사업보고서 2022~2025) (DART 전자공시시스템) — <a href="https://dart.fss.or.kr/navi/searchNavi.do?naviCrpCik=01288827&amp;naviCrpNm=HPSP&amp;naviCode=A002" target="_blank" rel="noopener">https://dart.fss.or.kr/navi/searchNavi.do?naviCrpCik=01288827&amp;naviCrpN</a></li><li>HPSP 공식 홈페이지 — 회사개요·연혁·Mission&amp;Vision·Technology·CEO인사말 (HPSP) — <a href="https://www.thehpsp.com/ko" target="_blank" rel="noopener">https://www.thehpsp.com/ko</a></li><li>HPSP - 위키백과 (위키백과) — <a href="https://ko.wikipedia.org/wiki/HPSP" target="_blank" rel="noopener">https://ko.wikipedia.org/wiki/HPSP</a></li><li>[더벨]크레센도, HPSP 리캡 &#x27;LP 중간회수·제값받기&#x27; 포석 (더벨) — <a href="https://www.thebell.co.kr/free/content/ArticleView.asp?key=202505121652084880105538" target="_blank" rel="noopener">https://www.thebell.co.kr/free/content/ArticleView.asp?key=20250512165</a></li><li>[Who Is?] 김용운 HPSP 대표이사 (비즈니스포스트) — <a href="https://www.businesspost.co.kr/BP?command=article_view&amp;num=395777" target="_blank" rel="noopener">https://www.businesspost.co.kr/BP?command=article_view&amp;num=395777</a></li><li>[더벨] &#x27;HPSP 3.0&#x27; 추진, 대표이사 5년만 교체 (더벨) — <a href="https://www.thebell.co.kr/free/content/ArticleView.asp?key=202509290953124760108314" target="_blank" rel="noopener">https://www.thebell.co.kr/free/content/ArticleView.asp?key=20250929095</a></li><li>[Who Is?] 이춘흥 HPSP 대표이사 (비즈니스포스트) — <a href="https://www.businesspost.co.kr/BP?command=article_view&amp;num=439471" target="_blank" rel="noopener">https://www.businesspost.co.kr/BP?command=article_view&amp;num=439471</a></li><li>HPSP, 신임 각자대표로 김재현 한화세미텍 前 대표 선임 (디일렉) — <a href="https://www.thelec.kr/news/articleView.html?idxno=61583" target="_blank" rel="noopener">https://www.thelec.kr/news/articleView.html?idxno=61583</a></li><li>[더벨]HPSP, 글로벌 IB 출신 &#x27;신임 CFO&#x27; 영입 (더벨) — <a href="https://www.thebell.co.kr/free/content/ArticleView.asp?key=202606151700478360105275" target="_blank" rel="noopener">https://www.thebell.co.kr/free/content/ArticleView.asp?key=20260615170</a></li><li>크레센도, HPSP 지분 10% 블록딜…&#x27;잔여 지분은 홀딩&#x27; (이데일리) — <a href="http://www.edaily.co.kr/news/newspath.asp?newsid=03165206645315424" target="_blank" rel="noopener">http://www.edaily.co.kr/news/newspath.asp?newsid=03165206645315424</a></li><li>한미반도체, 스페이스X에 500억 투자 (HPSP 투자 회수 이력 언급) (이코노믹리뷰) — <a href="https://www.econovill.com/news/articleView.html?idxno=742302" target="_blank" rel="noopener">https://www.econovill.com/news/articleView.html?idxno=742302</a></li><li>&#x27;2조 몸값&#x27; HPSP 매각 본입찰 연기... &#x27;막상 뜯어보니 너무 비싸&#x27; (조선비즈) — <a href="https://n.news.naver.com/mnews/article/366/0001063154?sid=101" target="_blank" rel="noopener">https://n.news.naver.com/mnews/article/366/0001063154?sid=101</a></li><li>[단독]&#x27;한국판 ASML&#x27; HPSP, MBK 등 5파전으로 압축 (한국경제) — <a href="https://n.news.naver.com/mnews/article/015/0005089382?sid=101" target="_blank" rel="noopener">https://n.news.naver.com/mnews/article/015/0005089382?sid=101</a></li><li>HPSP 대주주들 &#x27;대박&#x27;...주주들은 &#x27;쪽박&#x27;? [사모펀드 논란]③ (한스경제) — <a href="http://www.hansbiz.co.kr/news/articleView.html?idxno=741294" target="_blank" rel="noopener">http://www.hansbiz.co.kr/news/articleView.html?idxno=741294</a></li><li>HPSP &#x27;삼성에 납품한 장비 영상 추가 제출해야&#x27; vs. 예스티 (지디넷코리아) — <a href="https://n.news.naver.com/mnews/article/092/0002433931?sid=105" target="_blank" rel="noopener">https://n.news.naver.com/mnews/article/092/0002433931?sid=105</a></li><li>예스티 &#x27;특허심판원, HPSP 고압어닐링장비 특허 최종무효 판정&#x27; (딜사이트) — <a href="https://dealsite.co.kr/articles/162704" target="_blank" rel="noopener">https://dealsite.co.kr/articles/162704</a></li><li>[더벨]HPSP, 핵심기술 &#x27;유효 판정&#x27;·추가 대응방안 검토 (더벨) — <a href="https://www.thebell.co.kr/free/content/ArticleView.asp?key=202606182202455600109654" target="_blank" rel="noopener">https://www.thebell.co.kr/free/content/ArticleView.asp?key=20260618220</a></li><li>&#x27;HPSP와 특허 분쟁&#x27; 예스티, &#x27;HPA 불확실성&#x27; 연내 마무리 기대 (뉴스에프씨) — <a href="http://www.newsfc.co.kr/news/articleView.html?idxno=80833" target="_blank" rel="noopener">http://www.newsfc.co.kr/news/articleView.html?idxno=80833</a></li><li>[Who Is?] 장동복 예스티 대표이사 (비즈니스포스트) — <a href="https://www.businesspost.co.kr/BP?command=article_view&amp;num=442294" target="_blank" rel="noopener">https://www.businesspost.co.kr/BP?command=article_view&amp;num=442294</a></li><li>[단독] HPSP, 삼성·SK에 D램용 장비 납품한다 (한국경제TV) — <a href="https://n.news.naver.com/mnews/article/215/0001257224?sid=101" target="_blank" rel="noopener">https://n.news.naver.com/mnews/article/215/0001257224?sid=101</a></li><li>곽동신 한미반도체 회장, 자사주 50억 매수…지분율 33.62% 회복 (블로터) — <a href="https://n.news.naver.com/mnews/article/293/0000088331?sid=101" target="_blank" rel="noopener">https://n.news.naver.com/mnews/article/293/0000088331?sid=101</a></li><li>HPSP, 5만5900원 찍고 상승폭 반납…2분기 실적 (잡포스트) — <a href="https://www.job-post.co.kr/news/articleView.html?idxno=226668" target="_blank" rel="noopener">https://www.job-post.co.kr/news/articleView.html?idxno=226668</a></li><li>반도체공장 증설…HPSP 내년에도 폭발적 성장 [한국주식 원포인트 레슨] (매일경제) — <a href="https://n.news.naver.com/mnews/article/009/0005723566?sid=101" target="_blank" rel="noopener">https://n.news.naver.com/mnews/article/009/0005723566?sid=101</a></li><li>삼성전기 목표주가 140만원 vs 300만원…코스닥 편차 34.9% HPSP (아시아경제) — <a href="https://n.news.naver.com/mnews/article/277/0005777321?sid=101" target="_blank" rel="noopener">https://n.news.naver.com/mnews/article/277/0005777321?sid=101</a></li><li>[멜콘 IPO] 워트보다 우위 자신…보수적 몸값 자신감 (더스탁) — <a href="https://www.the-stock.kr/news/articleView.html?idxno=33231" target="_blank" rel="noopener">https://www.the-stock.kr/news/articleView.html?idxno=33231</a></li><li>HPSP expands its R&amp;D capabilities and study on HPA and HPO (imec) — <a href="https://www.imec-int.com/en/press/hpsp-expands-its-rd-capabilities-and-study-hpa-and-hpo" target="_blank" rel="noopener">https://www.imec-int.com/en/press/hpsp-expands-its-rd-capabilities-and</a></li><li>Yahoo Finance 시세 API (403870.KQ, 조회 시점 최근 거래일 종가 기준) (Yahoo Finance) — <a href="https://query1.finance.yahoo.com/v8/finance/chart/403870.KQ" target="_blank" rel="noopener">https://query1.finance.yahoo.com/v8/finance/chart/403870.KQ</a></li></ol></div>
+  <div class="note-nav"><a href="cosmecca-korea-2026h1.html"><span class="lbl">← 이전 글</span>코스메카코리아(241710) — 2026년 상반기 분석</a><a href="jusung-engineering-2026h1.html"><span class="lbl">다음 글 →</span>주성엔지니어링(036930) — 2026년 반기 기준 기업분석</a></div>
+  <div class="footer">powered by Claude · 주식공부 노트</div>
+</div>
+
+
+</body>
+</html>
