@@ -62,14 +62,22 @@ self.addEventListener('push', (event) => {
   );
 });
 
-// 알림 클릭 → 이미 열려 있는 탭이 있으면 그 탭을 살리고, 없으면 새로 연다.
+// 알림 클릭 → 이미 열려 있는 탭이 있으면 그 탭을 target으로 이동시킨 뒤 살리고, 없으면 새로 연다.
+//
+// ⛔ 2026-09-13 실증 버그: 기존엔 c.url.includes(SITE) && focus()만 했다. SITE는 사이트
+//    루트 경로라 사실상 그 사이트의 어떤 탭이든 걸리는데, navigate 없이 focus만 하면
+//    그 탭이 이미 보고 있던(예: notify.html) 화면 그대로 포커스만 돼서 "알림을 눌러도
+//    브리핑이 안 열리는 것처럼" 보인다(포트폴리오 브리핑 웹푸시에서 실측·수정 후 이식).
 self.addEventListener('notificationclick', (event) => {
   event.notification.close();
   const target = (event.notification.data && event.notification.data.url) || SITE;
   event.waitUntil(
-    clients.matchAll({ type: 'window', includeUncontrolled: true }).then((list) => {
+    clients.matchAll({ type: 'window', includeUncontrolled: true }).then(async (list) => {
       for (const c of list) {
-        if (c.url.includes(SITE) && 'focus' in c) return c.focus();
+        if ('focus' in c) {
+          if ('navigate' in c) { try { await c.navigate(target); } catch (e) {} }
+          return c.focus();
+        }
       }
       return clients.openWindow(target);
     })
